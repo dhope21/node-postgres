@@ -32,8 +32,8 @@ var sequelize = new Sequelize('Impactdb', 'nishant', 'Impact123', {
   User.sync({force: true}).then(function () {
     // Table created
     return User.create({
-      firstName: 'John',
-      lastName: 'Hancock',
-      age:23
+      firstName: 'Nishant',
+      lastName: 'Khandelwal',
+      age:26
     });
   });
