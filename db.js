@@ -8,10 +8,10 @@ const app = express();
 
 
 const pool = new Pool({
-  user: 'abhijeet',
+  user: 'nishant',
   host: 'localhost',
   database: 'share_backend_dev_api',
-  password: 'welcome@1',
+  password: 'Impact123',
   port: 5432,
 });
 
