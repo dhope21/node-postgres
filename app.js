@@ -29,11 +29,23 @@ var sequelize = new Sequelize('Impactdb', 'nishant', 'Impact123', {
     freezeTableName: true // Model tableName will be the same as the model name
   });
   
-  User.sync({force: true}).then(function () {
-    // Table created
-    return User.create({
-      firstName: 'Nishant',
-      lastName: 'Khandelwal',
-      age:26
-    });
+  // User.sync({force: true}).then(function () {
+  //   // Table created
+  //   return User.create({
+  //     firstName: 'Nishant',
+  //     lastName: 'Khandelwal',
+  //     age:26
+  //   });
+  // });
+  
+  //Insert item into User model/table
+  User.create({  
+    firstName: 'Max',
+    lastName: 'Well',
+    age: 38
+  
+  })
+  .then(user => {
+    console.log(`New ${user.firstName} ${user.lastName}, with id ${user.id} has been created.`);
   });
+ 
