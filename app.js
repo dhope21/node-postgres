@@ -1,6 +1,7 @@
 var Sequelize = require("sequelize");
 
-var sequelize = new Sequelize('Impactdb', 'nishant', 'Impact123', {
+
+var sequelize = new Sequelize('share_backend_dev_api', 'nishant', 'Impact123', {
     host: 'localhost',
     dialect: 'postgres',
   
@@ -14,21 +15,26 @@ var sequelize = new Sequelize('Impactdb', 'nishant', 'Impact123', {
   });
 
 
-  var User = sequelize.define('user', {
-    firstName: {
-      type: Sequelize.STRING,
-      field: 'first_name' // Will result in an attribute that is firstName when user facing but first_name in the database
-    },
-    lastName: {
-      type: Sequelize.STRING
-    },
-    age: {
-        type: Sequelize.INTEGER
-      }
-  }, {
-    freezeTableName: true // Model tableName will be the same as the model name
-  });
+  const City = sequelize.import("./models/share_api_city")
+  // var User = sequelize.define('user', {
+  //   firstName: {
+  //     type: Sequelize.STRING,
+  //     field: 'first_name' // Will result in an attribute that is firstName when user facing but first_name in the database
+  //   },
+  //   lastName: {
+  //     type: Sequelize.STRING
+  //   },
+  //   age: {
+  //       type: Sequelize.INTEGER
+  //     }
+  // }, {
+  //   freezeTableName: true // Model tableName will be the same as the model name
+  // });
   
+
+
+
+
   // User.sync({force: true}).then(function () {
   //   // Table created
   //   return User.create({
@@ -39,13 +45,11 @@ var sequelize = new Sequelize('Impactdb', 'nishant', 'Impact123', {
   // });
   
   //Insert item into User model/table
-  User.create({  
-    firstName: 'Max',
-    lastName: 'Well',
-    age: 38
-  
-  })
-  .then(user => {
-    console.log(`New ${user.firstName} ${user.lastName}, with id ${user.id} has been created.`);
-  });
+  // City.create({  
+  //   city:'Baran'
+  //   })
+  // .then(city => {
+  //   console.log(`New ${city.city}, with id ${city.id} has been created.`);
+  // });
  
+  City.findAll();
