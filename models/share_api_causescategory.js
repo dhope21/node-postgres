@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('share_api_causescategory', {
     cause_category_id: {
       type: DataTypes.INTEGER,
@@ -12,7 +12,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
-    tableName: 'share_api_causescategory'
-  });
+  },
+    {
+      timestamps: false,
+      freezeTableName: true
+    },
+    {
+      tableName: 'share_api_causescategory'
+    });
 };
