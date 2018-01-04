@@ -1,6 +1,6 @@
 
 # node-postgres-express-sequalize
-
+This branch consists all models
 This project consists a Proof of Concept for a scalable backend node application.
 To get started -
 
