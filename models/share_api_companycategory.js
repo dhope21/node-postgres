@@ -16,7 +16,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
+  }, 
+  {
+    freezeTableName: true,
+    timestamps: false,
+  
+},
+  {
     tableName: 'share_api_companycategory'
   });
 };

@@ -69,7 +69,13 @@ module.exports = function(sequelize, DataTypes) {
         key: 'company_category_id'
       }
     }
-  }, {
+  }, 
+  { 
+    underscored:true,
+    freezeTableName: true,
+    timestamps: false,
+},
+  {
     tableName: 'share_api_company'
   });
 };
