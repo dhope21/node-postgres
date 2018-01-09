@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
   {
     freezeTableName: true,
     timestamps: false,
-  
+    underscored: true
 },
   {
     tableName: 'share_api_companycategory'

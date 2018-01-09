@@ -19,6 +19,16 @@ var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.passwor
 
 const companyCat = sequelize.import("../models/share_api_companycategory");
 const company = sequelize.import("../models/share_api_company");
+
+
+//companyCat.hasMany(company)
+// company.belongsTo(companyCat,{
+//     as: 'company',
+//     foreignKey: {
+//         name: 'company_category_id',
+//         allowNull: false
+//     }
+// })
 //  
 // company.belongsTo(companyCat,{foreignKey: 'company_category_id',targetKey:'company_category_id'});
 // company.hasMany(companyCat,{foreignKey: 'company_category_id'});
@@ -26,11 +36,11 @@ const company = sequelize.import("../models/share_api_company");
 var causeModel = {
     getCompanyCategory(req, res) {
         companyCat.findAndCountAll(
-        //     {
-        //     include: [{
-        //         association: company,
-        //       }]
-        // }
+            {
+            // include: [{
+            //     association: company.belongsTo(companyCat),
+            //   }]
+        }
     )
             .then(category => {
                 res.json(category);
@@ -38,7 +48,16 @@ var causeModel = {
     },
 
     getCompany(req, res) {
-        company.findAndCountAll()
+        company.findAndCountAll({
+            include: [{
+                association: company.belongsTo(companyCat,{
+                    foreignKey: {
+                        name: 'company_category_id',
+                        allowNull: false
+                    }
+                }),
+              }]
+        })
         .then(company => {
             res.json(company);
         })
