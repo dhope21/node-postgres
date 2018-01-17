@@ -10,6 +10,8 @@ const paginconfig = env.pagination;
 const baseUrl = 'http://localhost:3000/userFeedback';
 
 var feedback = {
+
+    //get all feedback from single user
     getFeedback(req, res) {
         var user_id = req.params.user_id;
         user_id = parseInt(user_id);
@@ -25,7 +27,7 @@ var feedback = {
                     res.json(pagin.getPagination(feedback, req.query, url, paginconfig.NORMAL));
                 })
         }
-        //get all runs
+        //get all feedback
         else {
             return db.feedback.findAndCountAll(pagin.getOffset(paginconfig.SMALL, req.query))
                 .then(feedback => {
