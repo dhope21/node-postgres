@@ -35,3 +35,11 @@ test('It should response the GET city', (done) => {
         done();
     });
 });
+
+test('It should response the GET city', (done) => {
+    request(app).get('/runs/').then((response) => {
+    	console.log("response-----------",JSON.parse(response.text).count);
+        expect(JSON.parse(response.text).count).toBeGreaterThan(10);
+        done();
+    });
+});

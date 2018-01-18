@@ -10,6 +10,8 @@ const paginconfig = env.pagination;
 const baseUrl = 'http://localhost:3000/teams';
 
 var Team = {
+
+    //Get single team
     getTeams(req, res) {
         var team = req.params.id;
         team = parseInt(team);
@@ -25,8 +27,9 @@ var Team = {
                     res.json(pagin.getPagination(team, req.query, url, paginconfig.NORMAL));
                 })
         }
-        //get all runs
+        //get all teams
         else {
+            console.log("PAGINATE",pagin.getOffset(paginconfig.SMALL, req.query));
             return db.team.findAndCountAll(pagin.getOffset(paginconfig.SMALL, req.query))
                 .then(team => {
                     // console.log("limit", pagination.NORMAL);
