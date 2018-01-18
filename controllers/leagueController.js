@@ -21,13 +21,9 @@ var League = {
             return db.impactLeague.findAndCountAll({
                 where: {
                     id: league
-                },
-                order: sequelize.literal('impactleague_name DESC'),
-                attributes: ['id', ['impactleague_name','league_name'], 'duration', 'start_date', 'is_active','impactleague_banner','team_size','end_date']
-        
+                }            
             })
                 .then(league => {
-
                     res.json(pagin.getPagination(league, req.query, baseUrl, paginconfig.NORMAL));
                 })
         }

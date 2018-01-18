@@ -7,7 +7,7 @@ const baseUrl = 'http://localhost:3000/runs';
 const env = require('../../config/settings');
 const paginconfig = env.pagination;
 var jsonQ = require("jsonq");
-var timeFormatter = require('../../timeformat');
+
 
 
 const fields = ['run_id', 'start_location_lat', 'start_location_long', 'start_time',
@@ -58,12 +58,7 @@ var runModel = {
                     res.json(runs);
                 })
         }
-        //get all runs
-        // var getlimit = pagin.getOffset(paginconfig.SMALL, req.query);
-        // getlimit = JSON.stringify(getlimit);
-        // console.log("GET LIMIT", getlimit.toString());
-        // getlimit = getlimit.replace(/{/g, '').replace(/}/g, '');
-        // getlimit = getlimit.replace(/"/g, '');
+     
         if (req.query) {
             console.log("REQ...", req.query);
             return db.runs.findAndCountAll({
@@ -72,26 +67,8 @@ var runModel = {
                 attributes: fields,
 
             })
-                .then(runs => {
-
-                    var sendRun = pagin.getPagination(runs, req.query, baseUrl, paginconfig.SMALL);
-                    sendRun = jsonQ(sendRun.rows);
-                    var run_duration = sendRun.find('run_duration')
-                    //    run_duration= run_duration.value();
-                    console.log("RUN.......", run_duration);
-                    var formattedDuration = [];
-                    run_duration.each((index, path, value) => {
-                        console.log(value);
-                        var time = value.days * 86400 || 0
-                        time += value.hours * 3600 || 0
-                        time += value.minutes* 60 || 0 
-                        time += value.seconds || 0;
-                        value = timeFormatter(time*1000)
-                       
-                        formattedDuration.push(value);
-                       console.log("formatted Duration", formattedDuration)
-                    })
-                    res.json(sendRun);
+                .then(runs => {                    
+                    res.json(pagin.getPagination(runs, req.query, baseUrl, paginconfig.SMALL));
                 })
         }
     },

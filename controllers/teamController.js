@@ -9,6 +9,8 @@ const paginconfig = env.pagination;
 
 const baseUrl = 'http://localhost:3000/teams';
 
+var fields= ["id", "team_name", "team_code", "team_captain", "team_captain_email_id", ["impactleague_id","impactleague"], "team_captain_phone"];
+
 var Team = {
 
     //Get single team
@@ -20,7 +22,8 @@ var Team = {
             return db.team.findAndCountAll({
                 where: {
                     id: team
-                }
+                },
+                attributes:fields
             })
                 .then(team => {
                     var url = baseUrl + '/' + team;
@@ -30,7 +33,7 @@ var Team = {
         //get all teams
         else {
             console.log("PAGINATE",pagin.getOffset(paginconfig.SMALL, req.query));
-            return db.team.findAndCountAll(pagin.getOffset(paginconfig.SMALL, req.query))
+            return db.team.findAndCountAll({limit:20,offset:0,attributes:fields})
                 .then(team => {
                     // console.log("limit", pagination.NORMAL);
                     res.json(pagin.getPagination(team, req.query, baseUrl, paginconfig.SMALL));
